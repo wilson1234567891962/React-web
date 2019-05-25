@@ -50,12 +50,11 @@ ReactDOM.render(element,container);
     // Esta opcion es segunda crear elementos con jsx
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import BadgeNew from './pages/BadgeNew.js';
-    import Badges from './pages/Badges.js';
     import './global.css';
     import 'bootstrap/dist/css/bootstrap.css';
-
+    import App from './components/router/App.js'
+    
     var container=document.getElementById('app');
-    ReactDOM.render(<Badges/>, container);
+    ReactDOM.render(<App/>, container);
   
     
