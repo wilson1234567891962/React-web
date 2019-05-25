@@ -52,6 +52,15 @@ class BadgeForm extends React.Component {
                             type="text"
                             name="twitter" />
                     </div>
+                    <div className="form-group">
+                        <label >Job</label>
+                        <input
+                            value={this.props.formValues.jobTitle}
+                            onChange={this.props.onChange}
+                            className="form-control"
+                            type="text"
+                            name="jobTitle" />
+                    </div>
                     <div>
                         <button onClick={this.handleClick} className="btn btn-primary">Save</button>
                     </div>
