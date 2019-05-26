@@ -46,12 +46,6 @@ function BadgeDetails(props) {
                         <h2>Action</h2>
                         <div>
                             <div>
-                                <button onClick={() => {
-                                    setCount(count + 1);
-                                }} className="btn btn-primary mr-4">
-                                    Increase count: {count}
-                                </button>
-
                                 <Link className="btn btn-primary mb-4" to={`/badges/${badge.id}/edit`}>
                                     Edit
                                 </Link>
