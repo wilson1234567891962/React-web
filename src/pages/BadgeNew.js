@@ -4,9 +4,12 @@ import '../components/styles/BadgeNew.css';
 import Badge from '../components/js/Badge';
 import BadgeForm from '../components/js/BadgeForm';
 import api from '../api.js';
+import PageLoading from '../components/js/PageLoading.js';
 
 class BadgeNew extends React.Component {
   state = {
+    loading: false,
+    error: null,
     form: {
       firstName: '',
       lastName: '',
@@ -22,6 +25,7 @@ class BadgeNew extends React.Component {
     try {
       await api.badges.create(this.state.form);
       this.setState({ loading: false })
+      this.props.history.push('/badges/new');
     } catch (error) {
       this.setState({ loading: false, error: error })
     }
@@ -37,6 +41,9 @@ class BadgeNew extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
     return (
       <React.Fragment>
         <div className="BadgeNew__hero">
@@ -58,7 +65,8 @@ class BadgeNew extends React.Component {
               <BadgeForm
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
-                formValues={this.state.form} />
+                formValues={this.state.form}
+                error={this.state.error} />
             </div>
           </div>
         </div>
