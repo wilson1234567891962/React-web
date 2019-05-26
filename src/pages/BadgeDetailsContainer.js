@@ -9,7 +9,38 @@ class BadgeDetailsContainer extends React.Component {
     state = {
         loading: true,
         error: null,
-        data: undefined
+        data: undefined,
+        modalIsOpen: false
+    }
+
+    handleCloseModal = e => {
+        this.setState({ modalIsOpen: false })
+    }
+
+    handleDeleteBadge = async e => {
+        this.setState({
+            loading: true,
+            error: null
+        })
+
+        try {
+            const data = await api.badges.remove(
+                this.props.match.params.badgeId
+            )
+            this.setState({
+                loading: false
+            })
+            this.props.history.push('/badges/new');
+        } catch (error) {
+            this.setState({
+                loading: false,
+                error: error
+            })
+        }
+    }
+
+    handleOpenModal = e => {
+        this.setState({ modalIsOpen: true })
     }
 
     componentDidMount() {
@@ -48,7 +79,12 @@ class BadgeDetailsContainer extends React.Component {
         }
 
         return (
-            <BadgeDetails badge={this.state.data} />
+            <BadgeDetails
+                onCloseModal={this.handleCloseModal}
+                onOpenModal={this.handleOpenModal}
+                modalIsOpen={this.state.modalIsOpen}
+                onDeleteBadge={this.handleDeleteBadge}
+                badge={this.state.data} />
         );
 
     }
